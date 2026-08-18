@@ -76,7 +76,49 @@ Valorant desafio/
 
 5. Abra o overlay
 
-   Acesse `http://localhost:3000` no navegador, ou adicione essa URL como fonte de navegador no OBS/Streamlabs.
+   Acesse `http://localhost:3000` no navegador para conferir se está funcionando, ou siga o passo abaixo para usá-lo direto no OBS.
+
+### 🎥 Adicionando o overlay no OBS Studio
+
+Com o servidor rodando (`npm start`), siga esses passos no OBS:
+
+1. Na aba **Fontes**, clique no **+** e escolha **Navegador** (Browser Source)
+2. Dê um nome, tipo "Desafios Overlay", e clique em OK
+3. Nas propriedades da fonte, preencha:
+   - **URL:** `http://localhost:3000`
+   - **Largura:** 1920 (ou a resolução da sua cena)
+   - **Altura:** 1080
+4. Marque a opção **Atualizar navegador quando a cena ficar ativa** (Refresh browser when scene becomes active), para garantir que o overlay recarregue corretamente
+5. Clique em **OK**
+
+O overlay deve aparecer na sua cena, e os desafios vão surgir automaticamente sempre que forem sorteados (seja manualmente ou via doação pela LivePix).
+
+> 💡 **Dica:** Se o overlay não aparecer ou ficar com fundo branco, verifique se o servidor (`npm start`) está rodando antes de abrir o OBS, e se a URL está exatamente `http://localhost:3000`.
+
+### 🌐 Expondo o servidor com ngrok (necessário para receber webhooks da LivePix)
+
+Como o servidor roda localmente (`localhost`), a LivePix não consegue enviar notificações de doação diretamente para sua máquina — é preciso um endereço público na internet. O [ngrok](https://ngrok.com/) cria esse túnel público apontando para o seu `localhost`.
+
+1. Baixe e instale o ngrok em [ngrok.com/download](https://ngrok.com/download)
+
+2. Com o servidor já rodando (`npm start`, passo anterior), abra outro terminal e rode:
+   ```bash
+   ngrok http 3000
+   ```
+
+3. O ngrok vai te dar uma URL pública, algo como:
+   ```
+   https://algum-nome-aleatorio.ngrok-free.dev
+   ```
+
+4. Copie essa URL e cole no painel da LivePix, em **API > sua aplicação > URL de notificações**, adicionando `/livepix` no final:
+   ```
+   https://algum-nome-aleatorio.ngrok-free.dev/livepix
+   ```
+
+5. Salve a configuração na LivePix. Agora, quando alguém fizer uma doação, a LivePix vai avisar seu servidor local através desse túnel, e o overlay vai reagir em tempo real.
+
+> ⚠️ **Atenção:** no plano gratuito do ngrok, essa URL muda toda vez que você reinicia o túnel. Isso significa que você precisa atualizar a URL de notificações na LivePix sempre que reiniciar o ngrok. Para uma URL fixa, é necessário um plano pago do ngrok ou hospedar o servidor em um serviço na nuvem.
 
 ## 📋 Desafios
 
