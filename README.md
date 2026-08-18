@@ -118,8 +118,6 @@ Como o servidor roda localmente (`localhost`), a LivePix não consegue enviar no
 
 5. Salve a configuração na LivePix. Agora, quando alguém fizer uma doação, a LivePix vai avisar seu servidor local através desse túnel, e o overlay vai reagir em tempo real.
 
-> ⚠️ **Atenção:** no plano gratuito do ngrok, essa URL muda toda vez que você reinicia o túnel. Isso significa que você precisa atualizar a URL de notificações na LivePix sempre que reiniciar o ngrok. Para uma URL fixa, é necessário um plano pago do ngrok ou hospedar o servidor em um serviço na nuvem.
-
 ## 📋 Desafios
 
 A lista de desafios fica em `data/desafios.json` e pode ser editada livremente para adicionar, remover ou ajustar o tempo de duração de cada um.
